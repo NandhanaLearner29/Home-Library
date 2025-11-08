@@ -1,0 +1,33 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.7); /* black + transparent */
+  padding: 16px 32px;
+  color: #f0f0f0; /* dim white */
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: blur(4px); /* Optional but makes it look prooo */
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: 600;
+  color: #e0e0e0; /* softer white */
+}
+
+.logout button {
+  background-color: transparent;
+  border: 1px solid #ccc;
+  color: #f0f0f0;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.logout button:hover {
+  background-color: #333;
+  color: #ffffff;
+}

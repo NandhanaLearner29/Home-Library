@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
 require("./config/db_config");
 const myRoutes = require("./routes/library_routes");
 
@@ -8,6 +9,7 @@ const API_ENDPOINT = "/home_library"; // 👈 notice the slash
 
 // 👇 Middleware to parse JSON requests
 app.use(express.json());
+app.use(cors());
 
 // 👇 Mount your routes
 app.use(API_ENDPOINT, myRoutes);

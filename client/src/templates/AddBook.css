@@ -1,0 +1,62 @@
+.add-book-page {
+  min-height: 100vh;
+  background: url("https://images.unsplash.com/photo-1728506972831-193841eb2961?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170")
+    no-repeat center center/cover;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-container {
+  background-color: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  margin-top: 100px;
+  padding: 40px 50px;
+  border-radius: 20px;
+  width: 400px;
+  text-align: center;
+  font-family: "Fira Code", monospace;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+}
+
+.form-container h2 {
+  font-family: "Playfair Display", serif;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+form input {
+  padding: 10px 12px;
+  border: none;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-size: 16px;
+}
+
+form input::placeholder {
+  color: #bbb;
+}
+
+form button {
+  background-color: transparent;
+  border: 1px solid #ccc;
+  color: #fff;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+form button:hover {
+  background-color: #333;
+  color: #fff;
+  transform: scale(1.05);
+}
