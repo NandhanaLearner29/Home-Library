@@ -1,0 +1,101 @@
+.explore-container {
+  background-color: #1c0f09;
+  min-height: 100vh;
+  color: #fff;
+  padding: 40px;
+  font-family: "Poppins", sans-serif;
+}
+
+.explore-title {
+  text-align: center;
+  font-size: 2.2rem;
+  margin-bottom: 30px;
+}
+
+.search-wrapper {
+  position: relative;
+  max-width: 600px;
+  margin: 0 auto 50px;
+}
+
+.search-bar {
+  width: 100%;
+  padding: 14px 18px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  background-color: #3b2b22;
+  color: #fff;
+  transition: box-shadow 0.3s ease;
+}
+
+.search-bar:focus {
+  box-shadow: 0 0 10px #a8745f;
+}
+
+.dropdown-results {
+  list-style: none;
+  position: absolute;
+  width: 100%;
+  background-color: #2b1b14;
+  border-radius: 10px;
+  margin-top: 5px;
+  padding: 0;
+  max-height: 250px;
+  overflow-y: auto;
+  z-index: 10;
+}
+
+.dropdown-results li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.dropdown-results li:hover {
+  background-color: #4b2f23;
+}
+
+.dropdown-img {
+  width: 40px;
+  height: 55px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.book-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 25px;
+}
+
+.book-card {
+  text-align: center;
+  background-color: #2b1b14;
+  border-radius: 12px;
+  padding: 15px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.book-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px #a8745f;
+}
+
+.book-cover {
+  width: 75%;
+  height: 430px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.book-title {
+  margin-top: 10px;
+  font-size: 1rem;
+  color: #f0e6dc;
+}

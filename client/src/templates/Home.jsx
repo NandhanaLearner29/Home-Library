@@ -47,7 +47,7 @@ const Home = () => {
           <h2>Explore Books</h2>
           <p>Check your books in your library</p>
           <div className="go">
-            <button>Go</button>
+            <button onClick={() => navigate("/explore-library")}>Go</button>
           </div>
         </div>
         <div className="option-card">
