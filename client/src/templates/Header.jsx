@@ -3,7 +3,9 @@ import "./Header.css";
 const Header = () => {
   return (
     <header className="header">
-      <div className="logo">Home Library</div>
+      <a href={"/"} className="logo">
+        Home Library
+      </a>
       <div className="logout">
         <button>Logout</button>
       </div>

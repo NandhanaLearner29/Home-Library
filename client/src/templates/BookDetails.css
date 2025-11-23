@@ -64,3 +64,34 @@
   color: #f0e9e1;
   font-size: 1.1rem;
 }
+
+.edit-icon {
+  margin-left: 10px;
+  cursor: pointer;
+  color: #d0c5b7;
+  transition: 0.2s;
+}
+
+.edit-icon:hover {
+  color: #ffffff;
+}
+
+.save-icon {
+  margin-left: 10px;
+  cursor: pointer;
+  color: #79ff8f;
+  font-size: 1.3rem;
+}
+
+.edit-input-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.edit-input-row input {
+  padding: 5px 10px;
+  border-radius: 6px;
+  border: 1px solid #aaa;
+  background-color: #fdfdfd;
+}

@@ -69,4 +69,32 @@ const searchBooks = async (req, res) => {
   }
 };
 
-module.exports = { addBook, getBookDetailsByname, fetchAllBooks, searchBooks };
+const updateBookDetails = async (req, res) => {
+  try {
+    const bookTitle = req.params.title;
+    const book = await Book.findOneAndUpdate(
+      { title: { $regex: `^${bookTitle}$`, $options: "i" } },
+      { $set: req.body },
+      {
+        new: true,
+      }
+    );
+
+    if (!book) {
+      return res.status(404).json({ message: "Book not found" });
+    }
+
+    return res.status(200).json({ message: "Book Updated successfully" });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ error: err });
+  }
+};
+
+module.exports = {
+  addBook,
+  getBookDetailsByname,
+  fetchAllBooks,
+  searchBooks,
+  updateBookDetails,
+};
