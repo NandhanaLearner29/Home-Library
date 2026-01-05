@@ -107,3 +107,5 @@ const ExploreBooks = () => {
   );
 };
 export default ExploreBooks;
+// max-width: 192.959px;
+//     max-height: 292px;
