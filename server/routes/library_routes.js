@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const protect = require("../security/authMiddleware");
 const {
   addBook,
   getBookDetailsByname,
@@ -10,11 +11,11 @@ const {
 
 const { registerUser, loginUser } = require("../services/userService");
 
-router.post("/addBook", addBook);
-router.get("/book/:title", getBookDetailsByname);
-router.get("/books", fetchAllBooks);
-router.get("/search", searchBooks);
-router.patch("/update/:title", updateBookDetails);
+router.post("/addBook", protect, addBook);
+router.get("/book/:title", protect, getBookDetailsByname);
+router.get("/books", protect, fetchAllBooks);
+router.get("/search", protect, searchBooks);
+router.patch("/update/:title", protect, updateBookDetails);
 
 // User routes
 router.post("/signup", registerUser);

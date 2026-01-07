@@ -43,21 +43,21 @@ const Home = () => {
       </section>
 
       <section className="options" ref={secondRef}>
-        <div className="option-card">
+        <div className="home-option-card">
           <h2>Explore Books</h2>
           <p>Check your books in your library</p>
           <div className="go">
             <button onClick={() => navigate("/explore-library")}>Go</button>
           </div>
         </div>
-        <div className="option-card">
+        <div className="home-option-card">
           <h2>Add Book</h2>
           <p>Got new addition to your library? Add it here</p>
           <div className="go">
             <button onClick={handleAdd}>Go</button>
           </div>
         </div>
-        <div className="option-card">
+        <div className="home-option-card">
           <h2>Reading Goals</h2>
           <p>Edit your Reading Goals </p>
           <div className="go">

@@ -5,11 +5,15 @@ import Home from "./templates/Home";
 import AddBook from "./templates/AddBook";
 import ExploreBooks from "./templates/ExploreBooks";
 import BookDetails from "./templates/BookDetails";
+import Login from "./templates/Login";
+import Register from "./templates/Register";
 
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
+      <Route path="/" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/home" element={<Home />} />
       <Route path="/add-book" element={<AddBook />} />
       <Route path="/explore-library" element={<ExploreBooks />} />
       <Route path="/get-book-details" element={<BookDetails />} />

@@ -2,7 +2,7 @@ const Book = require("../models/Book");
 const addBook = async (req, res) => {
   try {
     const bookData = req.body;
-    const book = new Book(bookData);
+    const book = new Book({ ...bookData, user_id: req.user.user_id });
     const data = await book.save();
     res.status(201).json({
       message: "Book added successfully!",
@@ -19,6 +19,7 @@ const getBookDetailsByname = async (req, res) => {
     const { title } = req.params;
     const bookDetails = await Book.findOne({
       title: { $regex: new RegExp(title, "i") },
+      user_id: req.user.user_id,
     });
     if (!bookDetails) {
       return res.status(404).json({ message: "Book Details not found!" });
@@ -32,7 +33,7 @@ const getBookDetailsByname = async (req, res) => {
 
 const fetchAllBooks = async (req, res) => {
   try {
-    const books = await Book.find();
+    const books = await Book.find({ user_id: req.user.user_id });
     if (!books.length) {
       return res.status(404).json({ message: "No Books to fetch!" });
     }
@@ -55,6 +56,7 @@ const searchBooks = async (req, res) => {
         { title: { $regex: q, $options: "i" } },
         { author: { $regex: q, $options: "i" } },
       ],
+      user_id: req.user.user_id,
     });
 
     if (!books) {
@@ -73,7 +75,10 @@ const updateBookDetails = async (req, res) => {
   try {
     const bookTitle = req.params.title;
     const book = await Book.findOneAndUpdate(
-      { title: { $regex: `^${bookTitle}$`, $options: "i" } },
+      {
+        title: { $regex: `^${bookTitle}$`, $options: "i" },
+        user_id: req.user.user_id,
+      },
       { $set: req.body },
       {
         new: true,

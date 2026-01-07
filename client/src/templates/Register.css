@@ -1,0 +1,132 @@
+/* ===== GLOBAL RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Fira Code", monospace;
+  color: #fff;
+}
+
+/* ===== PAGE WRAPPER ===== */
+.register-page {
+  min-height: 100vh;
+  background-color: #000; /* deep black base */
+  background-image: url("https://images.unsplash.com/photo-1725190216145-ea1455fd9914?q=80&w=1172&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+/* ===== FORM CONTAINER ===== */
+.register-form {
+  background-color: rgba(28, 15, 9, 0.85); /* dark library glass */
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  transition: transform 0.3s ease;
+}
+
+/* ===== FORM HEADER ===== */
+.register-form h1 {
+  text-align: center;
+  font-size: 1.8rem;
+  font-family: "Playfair Display", serif;
+  color: #f0e6dc;
+  margin-bottom: 1.2rem;
+}
+
+/* ===== LABELS ===== */
+.register-form label {
+  font-size: 0.9rem;
+  color: #d9cbb1;
+}
+
+/* ===== INPUTS ===== */
+.register-form input {
+  padding: 0.65rem 0.75rem;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  font-size: 0.95rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  transition: box-shadow 0.25s ease, transform 0.2s ease;
+}
+
+.register-form input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.register-form input:focus {
+  box-shadow: 0 0 8px #a8745f; /* bronze accent glow */
+  transform: scale(1.02);
+}
+
+/* ===== SUBMIT BUTTON ===== */
+.register-form button {
+  margin-top: 1rem;
+  padding: 0.7rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(
+    135deg,
+    #a8745f,
+    #f0c27b
+  ); /* bronze/golden accent */
+  color: #1c0f09;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: transform 0.2s ease, box-shadow 0.25s ease;
+}
+
+.register-form button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(168, 116, 95, 0.5);
+}
+
+/* ===== SIGN UP / LOGIN LINK ===== */
+.sign-in-toggle {
+  color: #f0e6dc;
+  text-align: center;
+  font-size: 0.85rem;
+}
+
+.sign-up a {
+  color: #a8745f;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.sign-up a:hover {
+  text-decoration: underline;
+}
+
+/* ===== ANIMATION ===== */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 480px) {
+  .register-form {
+    padding: 2rem 1.6rem;
+  }
+}

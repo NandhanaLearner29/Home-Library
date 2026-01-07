@@ -4,6 +4,7 @@ import Header from "./Header";
 import axios from "axios";
 
 const AddBook = () => {
+  const token = localStorage.getItem("token");
   const [formData, setFormData] = useState({
     title: "",
     author: "",
@@ -18,7 +19,12 @@ const AddBook = () => {
     try {
       const res = await axios.post(
         "http://localhost:5000/home_library/addBook",
-        formData
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       alert("Book Added Successfully!");
       setFormData({

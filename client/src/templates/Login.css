@@ -1,0 +1,92 @@
+/* Login Page Wrapper */
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url("https://images.unsplash.com/photo-1642160428828-334bf07023ec?q=80&w=1170&auto=format&fit=crop");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+/* Header text */
+.login-page-header {
+  font-family: "Playfair Display", serif;
+  font-size: 36px;
+  margin-bottom: 16px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Sign up text */
+.sign-in-toggle {
+  font-family: "Fira Code", monospace;
+  font-size: 14px;
+  margin-bottom: 24px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.sign-up a {
+  color: #ffffff;
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+
+.sign-up a:hover {
+  color: #ccc;
+}
+
+/* Login form card */
+.login-form {
+  background-color: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 40px 36px;
+  border-radius: 20px;
+  width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px);
+}
+
+/* Labels */
+.login-form label {
+  font-family: "Fira Code", monospace;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Inputs */
+.login-form input {
+  background-color: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  padding: 10px 12px;
+  color: #fff;
+  font-family: "Fira Code", monospace;
+  outline: none;
+}
+
+.login-form input:focus {
+  border-color: rgba(255, 255, 255, 0.7);
+}
+
+/* Login button */
+.login-form button {
+  margin-top: 12px;
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-family: "Fira Code", monospace;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.login-form button:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+}

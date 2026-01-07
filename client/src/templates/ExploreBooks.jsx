@@ -3,20 +3,29 @@ import Header from "./Header";
 import "./ExploreBooks.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+
 const ExploreBooks = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [books, setBooks] = useState([]);
   const navigate = useNavigate();
+  const token = localStorage.getItem("token");
 
   const handleSearch = async (query) => {
     setSearchQuery(query);
     if (query.trim() === "") {
       setSearchResults([]);
+      return;
     }
+
     try {
       const response = await axios.get(
-        `http://localhost:5000/home_library/search?q=${query}`
+        `http://localhost:5000/home_library/search?q=${query}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       setSearchResults(response.data);
     } catch (err) {
@@ -28,32 +37,38 @@ const ExploreBooks = () => {
     const fetchBooks = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/home_library/books"
+          "http://localhost:5000/home_library/books",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
         );
+
         const allBooks = response.data;
 
-        if (allBooks.length === 0) {
-          setBooks([]);
-        } else if (allBooks.length <= 10) {
+        if (allBooks.length <= 10) {
           setBooks(allBooks);
         } else {
           const randomBooks = allBooks
             .sort(() => 0.5 - Math.random())
-            .slice(0, 10);
+            .slice(0, 8);
           setBooks(randomBooks);
         }
       } catch (error) {
         console.error("Error fetching books:", error);
       }
     };
+
     fetchBooks();
-  }, []);
+  }, [token]);
 
   return (
     <>
       <Header />
       <div className="explore-container">
         <h1 className="explore-title">Explore Your Library</h1>
+
         <div className="search-wrapper">
           <input
             type="text"
@@ -62,6 +77,7 @@ const ExploreBooks = () => {
             value={searchQuery}
             onChange={(e) => handleSearch(e.target.value)}
           />
+
           {searchResults.length > 0 && (
             <ul className="dropdown-results">
               {searchResults.map((book) => (
@@ -84,13 +100,16 @@ const ExploreBooks = () => {
             </ul>
           )}
         </div>
+
         <div className="book-grid">
           {books.map((book) => (
             <div
               key={book._id}
               className="book-card"
               onClick={() =>
-                navigate("/get-book-details", { state: { title: book.title } })
+                navigate("/get-book-details", {
+                  state: { title: book.title },
+                })
               }
             >
               <img
@@ -106,6 +125,5 @@ const ExploreBooks = () => {
     </>
   );
 };
+
 export default ExploreBooks;
-// max-width: 192.959px;
-//     max-height: 292px;

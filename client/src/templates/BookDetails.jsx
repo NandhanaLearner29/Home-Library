@@ -10,6 +10,7 @@ const BookDetails = () => {
   const [book, setBook] = useState(null);
   const [editField, setEditField] = useState(null);
   const [fieldValue, setFieldValue] = useState("");
+  const token = localStorage.getItem("token");
 
   const title = location.state?.title;
   const navigate = useNavigate();
@@ -19,7 +20,12 @@ const BookDetails = () => {
     const fetchBook = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/home_library/book/${title}`
+          `http://localhost:5000/home_library/book/${title}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
         );
         setBook(response.data);
       } catch (err) {
@@ -40,7 +46,12 @@ const BookDetails = () => {
     try {
       await axios.patch(
         `http://localhost:5000/home_library/update/${book.title}`,
-        { [editField]: fieldValue }
+        { [editField]: fieldValue },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
 
       // Update UI instantly

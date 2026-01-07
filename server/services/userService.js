@@ -44,7 +44,7 @@ const loginUser = async (req, res) => {
       return res.status(400).json({ message: "User Name/Email doesn't exist" });
     }
 
-    const isMatch = bcrypt.compare(password, user.password);
+    const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       return res.status(400).json({ message: "Password doesn't match" });
     }
