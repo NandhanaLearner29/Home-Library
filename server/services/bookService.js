@@ -96,10 +96,26 @@ const updateBookDetails = async (req, res) => {
   }
 };
 
+const getTotalBookNumber = async (req, res) => {
+  try {
+    const book_length = await Book.countDocuments({
+      user_id: req.user.user_id,
+    });
+
+    return res.status(200).json({ book_length });
+  } catch (err) {
+    console.error(err);
+    return res
+      .status(500)
+      .json({ message: "Error in fetching the library audit" });
+  }
+};
+
 module.exports = {
   addBook,
   getBookDetailsByname,
   fetchAllBooks,
   searchBooks,
   updateBookDetails,
+  getTotalBookNumber,
 };

@@ -8,11 +8,45 @@ const ExploreBooks = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [books, setBooks] = useState([]);
+  const [libraryCount, setLibraryCount] = useState(0);
+
+  // pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const booksPerPage = 8;
+
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
 
+  /* =========================
+     FETCH TOTAL BOOK COUNT
+  ========================= */
+  useEffect(() => {
+    const fetchTotalBooks = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:5000/home_library/bookslength",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        setLibraryCount(response.data.book_length);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchTotalBooks();
+  }, [token]);
+
+  /* =========================
+     SEARCH
+  ========================= */
   const handleSearch = async (query) => {
     setSearchQuery(query);
+
     if (query.trim() === "") {
       setSearchResults([]);
       return;
@@ -33,6 +67,9 @@ const ExploreBooks = () => {
     }
   };
 
+  /* =========================
+     FETCH ALL BOOKS
+  ========================= */
   useEffect(() => {
     const fetchBooks = async () => {
       try {
@@ -45,16 +82,7 @@ const ExploreBooks = () => {
           }
         );
 
-        const allBooks = response.data;
-
-        if (allBooks.length <= 10) {
-          setBooks(allBooks);
-        } else {
-          const randomBooks = allBooks
-            .sort(() => 0.5 - Math.random())
-            .slice(0, 8);
-          setBooks(randomBooks);
-        }
+        setBooks(response.data);
       } catch (error) {
         console.error("Error fetching books:", error);
       }
@@ -63,12 +91,27 @@ const ExploreBooks = () => {
     fetchBooks();
   }, [token]);
 
+  /* =========================
+     PAGINATION LOGIC
+  ========================= */
+  const indexOfLastBook = currentPage * booksPerPage;
+  const indexOfFirstBook = indexOfLastBook - booksPerPage;
+  const currentBooks = books.slice(indexOfFirstBook, indexOfLastBook);
+
+  const totalPages = Math.ceil(books.length / booksPerPage);
+
+  /* =========================
+     JSX
+  ========================= */
   return (
     <>
       <Header />
+
       <div className="explore-container">
         <h1 className="explore-title">Explore Your Library</h1>
+        <p className="book-count">{libraryCount} books in your library</p>
 
+        {/* SEARCH */}
         <div className="search-wrapper">
           <input
             type="text"
@@ -101,8 +144,9 @@ const ExploreBooks = () => {
           )}
         </div>
 
+        {/* BOOK GRID */}
         <div className="book-grid">
-          {books.map((book) => (
+          {currentBooks.map((book) => (
             <div
               key={book._id}
               className="book-card"
@@ -121,6 +165,29 @@ const ExploreBooks = () => {
             </div>
           ))}
         </div>
+
+        {/* PAGINATION */}
+        {totalPages > 1 && (
+          <div className="pagination">
+            <button
+              disabled={currentPage === 1}
+              onClick={() => setCurrentPage((prev) => prev - 1)}
+            >
+              Prev
+            </button>
+
+            <span>
+              Page {currentPage} of {totalPages}
+            </span>
+
+            <button
+              disabled={currentPage === totalPages}
+              onClick={() => setCurrentPage((prev) => prev + 1)}
+            >
+              Next
+            </button>
+          </div>
+        )}
       </div>
     </>
   );

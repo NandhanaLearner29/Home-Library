@@ -18,6 +18,19 @@
   color: #f3e9df;
 }
 
+/* Book Count */
+.book-count {
+  text-align: center;
+  margin-top: -28px; /* pulls it closer to the title */
+  margin-bottom: 50px;
+
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.4px;
+
+  color: rgba(243, 233, 223, 0.75);
+}
+
 /* =========================
    SEARCH BAR
 ========================= */
@@ -130,17 +143,45 @@
 }
 
 /* Book Title */
-.book-title {
+.book-card .book-title {
   margin-top: 14px;
   font-size: 1rem;
-  color: #f0e6dc;
-  text-align: center;
   line-height: 1.35;
+  font-family: "Poppins", sans-serif;
 
   display: -webkit-box;
-  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+
+  max-height: calc(1.35em * 2);
   overflow: hidden;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 60px;
+}
+
+.pagination button {
+  background-color: #3b2b22;
+  border: none;
+  color: #fff;
+  padding: 8px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.pagination button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.pagination button:hover:not(:disabled) {
+  background-color: #a8745f;
 }
 
 /* =========================

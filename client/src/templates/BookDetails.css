@@ -1,6 +1,6 @@
 .book-details-page {
   min-height: 100vh;
-  background-color: #1a0e0e; /* deep dark brown */
+  background-color: #1a0e0e;
   color: #f5f3f1;
   font-family: "Fira Code", monospace;
   padding: 40px;
@@ -22,11 +22,11 @@
 }
 
 .book-details-cover {
-  width: 160px;
-  height: 240px;
+  width: 220px;
+  height: 330px;
   object-fit: cover;
-  border-radius: 12px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.75);
   transition: transform 0.3s ease;
 }
 
@@ -40,35 +40,27 @@
   max-width: 600px;
 }
 
-.book-title {
-  font-size: 2.6rem;
-  font-weight: bold;
-  margin-bottom: 15px;
+.book-main-title {
+  font-size: 3.2rem;
   font-family: "Playfair Display", serif;
-  color: #fdf8f3;
+  margin-bottom: 25px;
+  color: #fff7f0;
+  line-height: 1.15;
 }
 
-.book-author,
-.book-genre,
-.book-bought-date,
-.book-price,
-.book-language {
+.book-field {
   font-size: 1.3rem;
   margin: 10px 0;
   color: #d0c5b7;
 }
 
-.book-description {
-  margin-top: 25px;
-  line-height: 1.7;
-  color: #f0e9e1;
-  font-size: 1.1rem;
-}
-
-.edit-icon {
-  margin-left: 10px;
-  cursor: pointer;
+/* Make all icons uniform size */
+.edit-icon,
+.save-icon {
+  font-size: 1.2rem; /* same for both */
+  vertical-align: middle;
   color: #d0c5b7;
+  cursor: pointer;
   transition: 0.2s;
 }
 
@@ -77,10 +69,7 @@
 }
 
 .save-icon {
-  margin-left: 10px;
-  cursor: pointer;
   color: #79ff8f;
-  font-size: 1.3rem;
 }
 
 .edit-input-row {
@@ -94,4 +83,22 @@
   border-radius: 6px;
   border: 1px solid #aaa;
   background-color: #fdfdfd;
+}
+
+.book-description-section {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.book-description-section h3 {
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+  color: #f3e8dc;
+}
+
+.book-description-placeholder {
+  font-style: italic;
+  opacity: 0.6;
+  line-height: 1.7;
 }

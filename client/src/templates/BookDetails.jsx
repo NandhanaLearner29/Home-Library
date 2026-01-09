@@ -21,11 +21,7 @@ const BookDetails = () => {
       try {
         const response = await axios.get(
           `http://localhost:5000/home_library/book/${title}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
+          { headers: { Authorization: `Bearer ${token}` } }
         );
         setBook(response.data);
       } catch (err) {
@@ -33,7 +29,7 @@ const BookDetails = () => {
       }
     };
     fetchBook();
-  }, [title]);
+  }, [title, token]);
 
   const startEditing = (field) => {
     setEditField(field);
@@ -42,24 +38,14 @@ const BookDetails = () => {
 
   const saveField = async () => {
     if (!editField) return;
-
     try {
       await axios.patch(
         `http://localhost:5000/home_library/update/${book.title}`,
         { [editField]: fieldValue },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+        { headers: { Authorization: `Bearer ${token}` } }
       );
 
-      // Update UI instantly
-      setBook((prev) => ({
-        ...prev,
-        [editField]: fieldValue,
-      }));
-
+      setBook((prev) => ({ ...prev, [editField]: fieldValue }));
       setEditField(null);
     } catch (error) {
       console.error(error);
@@ -72,7 +58,7 @@ const BookDetails = () => {
         <Header />
         <div className="book-details-page">
           <div className="book-details-empty">
-            <p>No book details found 😢</p>
+            <p>No book details found</p>
             <button onClick={() => navigate(-1)}>Go Back</button>
           </div>
         </div>
@@ -83,7 +69,6 @@ const BookDetails = () => {
   return (
     <>
       <Header />
-
       <div className="book-details-page">
         <div className="book-details-container">
           {/* COVER IMAGE */}
@@ -112,19 +97,29 @@ const BookDetails = () => {
             )}
           </div>
 
-          {/* TEXT FIELDS */}
+          {/* BOOK INFO */}
           <div className="book-info-section">
             {/* TITLE */}
-            <EditableField
-              field="title"
-              label="Title"
-              value={book.title}
-              editField={editField}
-              startEditing={startEditing}
-              fieldValue={fieldValue}
-              setFieldValue={setFieldValue}
-              saveField={saveField}
-            />
+            <h1 className="book-main-title">
+              {editField === "title" ? (
+                <span className="edit-input-row">
+                  <input
+                    type="text"
+                    value={fieldValue}
+                    onChange={(e) => setFieldValue(e.target.value)}
+                  />
+                  <FiCheck className="save-icon" onClick={saveField} />
+                </span>
+              ) : (
+                <>
+                  {book.title}
+                  <FiEdit2
+                    className="edit-icon"
+                    onClick={() => startEditing("title")}
+                  />
+                </>
+              )}
+            </h1>
 
             {/* AUTHOR */}
             <EditableField
@@ -162,7 +157,7 @@ const BookDetails = () => {
               saveField={saveField}
             />
 
-            {/* DATE */}
+            {/* ACQUIRED DATE */}
             <EditableField
               field="acquired_date"
               label="Acquired Date"
@@ -185,6 +180,14 @@ const BookDetails = () => {
               setFieldValue={setFieldValue}
               saveField={saveField}
             />
+
+            {/* PLACEHOLDER FOR DESCRIPTION */}
+            <div className="book-description-section">
+              <h3>Description</h3>
+              <p className="book-description-placeholder">
+                Book description will appear here soon…
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -194,7 +197,7 @@ const BookDetails = () => {
 
 export default BookDetails;
 
-// COMPONENT FOR EDITABLE ROWS
+// EditableField Component
 const EditableField = ({
   field,
   label,
@@ -208,11 +211,10 @@ const EditableField = ({
   return (
     <p className="book-field">
       <strong>{label}: </strong>
-
       {editField === field ? (
         <span className="edit-input-row">
           <input
-            type="text"
+            type={field === "acquired_date" ? "date" : "text"}
             value={fieldValue}
             onChange={(e) => setFieldValue(e.target.value)}
           />
