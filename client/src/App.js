@@ -7,6 +7,7 @@ import ExploreBooks from "./templates/ExploreBooks";
 import BookDetails from "./templates/BookDetails";
 import Login from "./templates/Login";
 import Register from "./templates/Register";
+import ReadingCorner from "./templates/ReadingCorner";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <Route path="/add-book" element={<AddBook />} />
       <Route path="/explore-library" element={<ExploreBooks />} />
       <Route path="/get-book-details" element={<BookDetails />} />
+      <Route path="/reading-corner" element={<ReadingCorner />} />
     </Routes>
   );
 }

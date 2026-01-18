@@ -1,9 +1,17 @@
 const Book = require("../models/Book");
+const BookRS = require("../models/BookRS");
+const BookTBR = require("../models/BookTBR");
 const addBook = async (req, res) => {
   try {
     const bookData = req.body;
     const book = new Book({ ...bookData, user_id: req.user.user_id });
     const data = await book.save();
+
+    await BookRS.create({
+      user_id: req.user.user_id,
+      book_id: data._id,
+      status: "TBR",
+    });
     res.status(201).json({
       message: "Book added successfully!",
       data: book,
@@ -111,6 +119,87 @@ const getTotalBookNumber = async (req, res) => {
   }
 };
 
+//  Reading corner status
+
+const addBookInCurrentReading = async (req, res) => {
+  try {
+    const { book_id, start_date } = req.body;
+
+    const updatedStatus = await BookRS.findOneAndUpdate(
+      {
+        user_id: req.user.user_id,
+        book_id,
+      },
+      {
+        status: "Reading",
+      },
+      { new: true }
+    );
+
+    if (!updatedStatus) {
+      return res.status(404).json({
+        message: "Book reading status not found",
+      });
+    }
+
+    await BookTBR.create({
+      user_id: req.user.user_id,
+      book_id,
+      start_date,
+    });
+
+    return res.status(200).json({
+      message: "Book moved to current reading",
+      data: updatedStatus,
+    });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({
+      message: "Internal Server error while adding book to current reading",
+    });
+  }
+};
+
+const updateDateInCurrentReading = async (req, res) => {
+  try {
+    const { book_id, start_date, end_date } = req.body;
+
+    const tbr = await BookTBR.findOneAndUpdate(
+      {
+        user_id: req.user.user_id,
+        book_id,
+        start_date,
+      },
+      { end_date },
+      { new: true }
+    );
+
+    if (!tbr) {
+      return res.status(404).json({
+        message: "Reading session not found",
+      });
+    }
+
+    await BookRS.findOneAndUpdate(
+      {
+        user_id: req.user.user_id,
+        book_id,
+      },
+      { status: "Completed" }
+    );
+
+    return res.status(200).json({
+      message: "Reading session completed",
+      tbr,
+    });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({
+      message: "Internal Server error while updating reading session",
+    });
+  }
+};
+
 module.exports = {
   addBook,
   getBookDetailsByname,
@@ -118,4 +207,6 @@ module.exports = {
   searchBooks,
   updateBookDetails,
   getTotalBookNumber,
+  addBookInCurrentReading,
+  updateDateInCurrentReading,
 };
